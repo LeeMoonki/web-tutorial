@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <meta charset="utf8">
+  </head>
+  <body>
+    <h1></h1>
+    <p>Welcome to 프론트엔드 스터디</p>
+    <button id="btn">Click</button>
+
+    <script>
+      document.getElementById('btn').addEventListener('click', () => {
+        fetch('http://localhost:3000/users', (res) => {
+          console.log(res.json());
+        });
+      });
+    </script>
+  </body>
+</html>
