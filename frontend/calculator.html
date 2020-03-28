@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>grid</title>
+
+    <style>
+      .container {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        width: 300px;
+      }
+      .container > .grid-items {
+        line-height: 50px;
+        text-align: center;
+        background-color: #dedede;
+        border: 1px solid #fff;
+        cursor: pointer;
+      }
+      .zero {
+        grid-column-start: 1;
+        grid-column-end: 3;
+      }
+      .add { 
+        grid-column-start: 4;
+        grid-column-end: 5;
+        grid-row-start: 1;
+        grid-row-end: 3;
+       }
+       .sub {
+        grid-column-start: 4;
+        grid-column-end: 5;
+        grid-row-start: 3;
+        grid-row-end: 5;
+       }
+    </style>
+  </head>
+  <body>
+    <div id="container" class="container">
+      <div id="gridItem" class="grid-items">1</div>
+      <div class="grid-items">2</div>
+      <div class="grid-items">3</div>
+      <div class="grid-items add">+</div>
+      <div class="grid-items">4</div>
+      <div class="grid-items">5</div>
+      <div class="grid-items">6</div>
+      <div class="grid-items sub">-</div>
+      <div class="grid-items">7</div>
+      <div class="grid-items">8</div>
+      <div class="grid-items">9</div>
+      <div class="grid-items zero">0</div>
+      <div class="grid-items dot">.</div>
+    </div>
+
+    <script>
+
+      const container = document.getElementById('container'),
+      const gridItem = document.getElementById('gridItem');
+      
+      container.addEventListener('click', containerHandler, true);
+      // gridItem.addEventListener('click', itemHandler);
+
+
+      function containerHandler (e) {
+        const ele = e.target;
+        
+        console.log(ele.classList, ele.innerHTML)
+      }
+      function itemHandler (e) {
+        const ele = e.target;
+        
+        e.stopPropagation();
+        console.log(ele.id, ele.innerHTML)
+      }
+
+    </script>
+
+  </body>
+</html>

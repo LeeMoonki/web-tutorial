@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Counter</title>
+
+    <style>
+      /* button reset */
+      button {
+        margin: 0;
+        padding: 0;
+        width: auto;
+        overflow: visible;
+        background: transparent;
+        /* inherit font & color from ancestor */
+        color: inherit;
+        font: inherit;
+        /* Normalize `line-height`. Cannot be changed from `normal` in Firefox 4+. */
+        line-height: normal;
+        /* Corrects font smoothing for webkit */
+        -webkit-font-smoothing: inherit;
+        -moz-osx-font-smoothing: inherit;
+        /* Corrects inability to style clickable `input` types in iOS */
+        -webkit-appearance: none;
+
+        cursor: pointer;
+        border: none;
+        text-align: inherit;
+        outline: none;
+        border-radius: 0;
+        text-decoration: none;
+        display: inline-block;
+        box-sizing: border-box;
+        position: relative;
+      }
+      /* button reset */
+
+      .container {
+        display: flex;
+        align-items: center;
+      }
+      #value {
+        display: block;
+        margin-right: 5px;
+        width: 100px;
+        text-align: right;
+        border-bottom: 1px solid #232323;
+      }
+      .container > button {
+        margin-left: 10px;
+        width: 20px;
+        height: 20px;
+        line-height: 20px;
+        text-align: center;
+        border: 1px solid #dedede;
+        border-radius: 3px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <span id="value"></span>
+      <button id="add">+</button>
+      <button id="subtract">-</button>
+    </div>
+
+    <script type="text/javascript">
+      (() => {
+        const valueText = document.getElementById('value');
+        const btnAdd = document.getElementById('add');
+        const btnSubtract = document.getElementById('subtract');
+        let value = 0;
+
+        valueText.innerHTML = value;
+
+        
+
+        btnAdd.addEventListener('click', () => {
+          valueText.innerHTML = ++value;
+        });
+
+        btnSubtract.addEventListener('click', () => {
+          valueText.innerHTML = --value;
+        });
+      })();
+    </script>
+  </body>
+</html>
