@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Calculator</title>
+
+    <style>
+      div {
+        -webkit-touch-callout: none; /* iOS Safari */
+        -webkit-user-select: none; /* Safari */
+        -khtml-user-select: none; /* Konqueror HTML */
+          -moz-user-select: none; /* Old versions of Firefox */
+            -ms-user-select: none; /* Internet Explorer/Edge */
+                user-select: none; /* Non-prefixed version, currently
+                                      supported by Chrome, Opera and Firefox */
+      }
+
+      .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .grid-container {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        width: 300px;
+      }
+      .output {
+        grid-row-start: 1;
+        grid-row-end: 2;
+        grid-column-start: 1;
+        grid-column-end: 5;
+        padding: 10px;
+        text-align: right;
+      }
+      .grid-item {
+        padding: 20px 0;
+        text-align: center;
+        background-color: #ebebeb;
+        border: 1px solid #fff;
+        border-radius: 3px;
+        cursor: pointer;
+      }
+      .grid-item:hover {
+        background-color: #acacac;
+      }
+      .grid-item:active {
+        opacity: .7;
+      }
+      .plus {
+        grid-row-start: 2;
+        grid-row-end: 4;
+        grid-column-start: 4;
+        grid-column-end: 5;
+      }
+      .subtract {
+        grid-row-start: 4;
+        grid-row-end: 6;
+        grid-column-start: 4;
+        grid-column-end: 5;
+      }
+      .num0 {
+        grid-row-start: 5;
+        grid-row-end: 6;
+        grid-column-start: 1;
+        grid-column-end: 3;
+      }
+      .point {
+        font-size: 30px;
+        font-weight: 700;
+        line-height: 5px;
+      }
+      .clear {
+        grid-row-start: 6;
+        grid-row-end: 7;
+        grid-column-start: 1;
+        grid-column-end: 3;
+      }
+      .equal {
+        grid-row-start: 6;
+        grid-row-end: 7;
+        grid-column-start: 3;
+        grid-column-end: 5;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div id="calculator" class="grid-container">
+        <div id="value" class="output">0</div>
+        <div id="num7" class="grid-item">7</div>
+        <div id="num8" class="grid-item">8</div>
+        <div id="num9" class="grid-item">9</div>
+        <div id="plus" class="grid-item plus">+</div>
+        <div id="num4" class="grid-item">4</div>
+        <div id="num5" class="grid-item">5</div>
+        <div id="num6" class="grid-item">6</div>
+        <div id="subtract" class="grid-item subtract">-</div>
+        <div id="num1" class="grid-item">1</div>
+        <div id="num2" class="grid-item">2</div>
+        <div id="num3" class="grid-item">3</div>
+        <div id="num0" class="grid-item num0">0</div>
+        <div id="point" class="grid-item point">.</div>
+        <div id="clear" class="grid-item clear">Clear</div>
+        <div id="equal" class="grid-item equal">=</div>
+      </div>
+    </div>
+
+    <script type="text/javascript">
+      (() => {
+        const calculator = document.getElementById('calculator');
+        const value = document.getElementById('value');
+        const operators = ['plus', 'subtract', 'equal', 'clear'];
+        let operand = 0;
+        let operator = null;
+        let stack = [];
+
+        function insertValue(val) {
+          const value = document.getElementById('value');
+
+          if ((val + '').indexOf('+') === -1) {
+            value.innerHTML = val;
+          }          
+        }
+
+        calculator.addEventListener('click', e => {
+          const target = e.target;
+
+          if (target.id !== 'value') {
+            if (operators.includes(target.id)) {
+              if (target.id === 'clear') {
+                // clear는 무조건 초기화합니다.
+                operand = 0;
+                operator = null;
+                stack.length = 0;
+                insertValue('0');
+
+                return;
+              }
+
+              // operator
+              if (!operator) {
+                // 첫 연산자 입력
+                operand = stack.join('') - 0;
+              } else {
+                // 첫 연산자 이후 연산자
+                if (target.id === 'equal') {
+                  // = 를 클릭하면 바로 연산하여 결과를 보여준다.
+                  if (operator === 'plus') {
+                    operand = operand + (stack.join('') - 0);
+                  } else if (operator === 'subtract') {
+                    operand = operand - (stack.join('') - 0);
+                  }
+                } else {
+                  if (operator === 'plus') {
+                    operand = operand + (stack.join('') - 0);
+                  } else if (operator === 'subtract') {
+                    operand = operand - (stack.join('') - 0);
+                  } else if (operator === 'equal') {
+                    // = 를 클릭하면 stack은 비워져있는 상태지만 피연산자를 채워야하므로 value에 있는 값으로 채운다.
+                    operand = value.innerHTML - 0;
+                  }
+                }
+              }
+
+              operator = target.id;
+              insertValue(operand);
+              stack.length = 0;
+            } else {
+              if (target.id === 'point') {
+                if (stack.indexOf('.') === -1) {
+                  // 포인트가 없다면
+                  if (stack.length === 0) {
+                    // 숫자를 입력하지 않고 바로 포인트를 찍으면 앞에 0을 붙여준다.
+                    stack = ['0', '.'];
+                  } else {
+                    stack.push('.');
+                  }
+                  insertValue(stack.join(''));
+                }
+              } else {
+                if (stack.length === 1) {
+                  // 갯수가 한 개일 때가 이슈다. (처음에는 0도 입력받는다)
+                  if (stack[0] === '0') {
+                    // 만약에 0이 처음에 위치하고
+                    if (target.id !== 'num0') {
+                      // 0이 아닌 숫자가 들어오면 대체한다.
+                      stack[0] = target.innerText;
+                    }
+                    // 0이 들어오면 무시한다.
+                  } else {
+                    stack.push(target.innerText);
+                  }
+                } else {
+                  stack.push(target.innerText);
+                }
+                
+                insertValue(stack.join(''));
+              }
+            }
+          }
+        }, true);
+      })();
+    </script>
+  </body>
+</html>
