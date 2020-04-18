@@ -15,8 +15,20 @@
  * @param {string} operator 연산자. '+', '-', '*', '/'
  * @return {number} x operator y
  */
+
 function calculator(x, y, operator) {
-  
+  const ele = [
+    {id: 1, func: '+', cal: () => x + y},
+    {id: 2, func: '-', cal: () => x - y},
+    {id: 3, func: '*', cal: () => x * y},
+    {id: 4, func: '/', cal: () => x / y},
+  ];
+
+  for(let k in ele) {
+    if(operator === ele[k].func) {
+      return ele[k].cal();
+    }
+  }
 }
 
 
@@ -45,9 +57,32 @@ function calculator(x, y, operator) {
  * @param {string} operator x와 y를 인자로 받는 함수.
  * @return {number} operator 함수의 반환값.
  */
-function calculatorWithCallback(x, y, operator) {
 
-}
+function calculatorWithCallback(x, y, operator) {
+  operator(x, y);
+};
+
+function add(x, y) {
+  return x + y;
+};
+
+function sub(x, y) {
+  return x - y;
+};
+
+function mul(x, y) {
+  return x * y;
+};
+
+function div(x, y) {
+  return x / y;
+};
+
+
+
+calculator(1, 2, '+');
+calculatorWithCallback(1, 2, add);
+calculatorWithCallback(4, 1, sub);
 
 module.exports = {
   calculator,

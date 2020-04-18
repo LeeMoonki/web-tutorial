@@ -1,3 +1,4 @@
+
 /**
  * getProductsWithPriceLowerThan 함수를 구현합니다.
  * 
@@ -15,9 +16,19 @@
  *  ...
  * ];
  */
+const products = [
+  { id: 1, name: '장난감', price: 8000 },
+  { id: 2, name: '신발', price: 20000 },
+  { id: 3, name: '컴퓨터', price: 100000 },
+  { id: 4, name: '갈비', price: 15000 },
+  { id: 5, name: '시계', price: 10000 },
+  { id: 6, name: '안경', price: 32000 },
+];
 
 function getProductsWithPriceLowerThan(price, products) {
-  
+  const filtered = products.filter((val) => (val.price < price));
+
+  return filtered;
 }
 
 
@@ -48,8 +59,26 @@ function getProductsWithPriceLowerThan(price, products) {
  */
 
 function getProductsWithDiscount(discount, products) {
-  
+  const val = products.map(v => v.price * discount);
+
+  for (let k in products) {
+    products[k].discountedPrice = val[k];
+  }
+
+  return products;
 }
+
+// function getProductsWithDiscount(discount, products) {
+//   const result = products.map(p => ({
+//     ...p,
+//     discountedPrice: p.price * discount,
+//   }));
+
+//   return result;
+// }
+
+getProductsWithPriceLowerThan(15000,products);
+getProductsWithDiscount(0.3, products);
 
 module.exports = {
   getProductsWithPriceLowerThan,
