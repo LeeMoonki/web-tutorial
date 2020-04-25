@@ -3,8 +3,21 @@ const log = cont => {
 };
 
 setTimeout(() => { log('async1'); }, 10);
-for (let i = 0; i < 10; i++) {
-  log(i);
+for (let i = 0; i < 1000; i++) {
+  // log(i);
 }
+log('a')
 setTimeout(() => { log('async2'); }, 0);
-log('hi');
+log('b');
+sayFoo();
+
+function sayFoo() {
+  foo();
+  log('Foo');
+}
+function foo() {
+  for (let i = 0; i < 1000000000; i++) {
+    // log(i);
+  }
+  log('foooo');
+}

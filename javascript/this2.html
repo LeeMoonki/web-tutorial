@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="LeeMoonki">
+
+    <title>this</title>
+  </head>
+  <body>
+    <div class="foo"></div>
+    <div class="foo"></div>
+    <div class="foo"></div>
+    <div class="foo"></div>
+
+    <script>
+      function Car(owner, price, oil) {
+        this.owner = owner;
+        this.price = price;
+        this.oil = oil;
+        this.engine = true; // true 엔진 켜짐, false 엔진 꺼짐
+
+        this.interval = null;
+      }
+
+      Car.prototype.start = function() {
+        this.engine = true;
+        this.interval = setInterval(() => {
+          console.log(`burn oil of ${this.owner}'s car`);
+          this.oil = this.oil - 1;
+        }, 1000);
+      }
+      Car.prototype.stop = function() {
+        this.engine = false;
+        clearInterval(this.interval);
+        this.interval = null;
+
+        console.log(`stop engine of ${this.owner}'s car`);
+      }
+      Car.prototype.engineStatus = function() {
+        console.log(`${this.owner}'s car status`);
+        return {oil: this.oil, engine: this.engine};
+      }
+
+      let car1 = new Car('Chris', 1000, 100);
+      let car2 = new Car('Jone', 2000, 500);
+
+      const divs = document.getElementsByClassName('foo');
+      const arrDivs = Array.prototype.slice.call(divs);
+
+      console.log(divs, arrDivs);
+    </script>
+  </body>
+</html>

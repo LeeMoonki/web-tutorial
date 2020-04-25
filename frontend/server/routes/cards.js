@@ -1,3 +1,6 @@
+const express = require('express');
+const router = express.Router();
+
 const cards = [
   { title: 'Todo 리스트 작성하기', label: [{ name: 'todo', color: '#23bf02' }], summary: '할일을 이젠 Todo리스트를 통해 관리...' },
   { title: '자바스크립트로 동적 생성', label: [{ name: 'todo', color: '#23bf02' }], summary: '카드 리스트를 자바스크립트를 활용해 동적으로...' },
@@ -10,7 +13,7 @@ const db = {
     get: (page, options) => {
       const cs = (options && options.label) ? cards.filter(c => c.label.findIndex(l => l.name === options.label) > -1) : cards;
       const count = options ? (options.count || 10) : 10;
-      const start = (page - 1) * count;
+      const start = (page == null ? 0 : page - 1) * count;
       let result = [];
 
       for (let i = start, len = start + count; i < len; i++) {
@@ -24,34 +27,13 @@ const db = {
   }
 };
 
-const getCardsAPI = ({ page, options }) => {
-  let cardList;
-  if (typeof page === 'number') {
-     cardList = db.cards.get(page, options);
-  }
+router.get('/', function(req, res) {
+  const { page, label } = req.query;
 
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      if (!cardList) {
-        reject({
-          success: false,
-          list: null,
-        });
-      } else {
-        resolve({
-          success: true,
-          list: cardList
-        });
-      }
-    }, 0);
+  res.json({
+    success: true,
+    cards: db.cards.get(page, { label })
   });
-};
+});
 
-// 사용예
-// getCardsAPI({ page: 2, options: { label: 'todo' }}).then(res => {
-//   console.log(res.success, res.list.length, res);
-// });
-
-window.onload = () => {
-  // 코드 작성
-};
+module.exports = router;

@@ -4,7 +4,16 @@
  * @param {any} num 숫자
  */
 function zeroBaseNumber(num) {
+  let n = num - 0;
 
+  if (n !== n) {
+    return null;
+  } else if (n > 99) {
+    return '99';
+  }
+  n = n + '';
+
+  return `${'00'.slice(0, 2 - n.length)}${n}`;
 }
 
 /**
@@ -15,7 +24,28 @@ function zeroBaseNumber(num) {
  * @param {number} length 길이
  */
 function zeroBaseNumberWithLength(num, length = 2) {
+  let n = num - 0;
+  let maxNumber = 1;
+  let zeros = '';
 
+  if (n !== n) {
+    return null;
+  } if (length <= 0) {
+    throw new Error("'length' can not be less than 0.")
+  }
+
+  for (let i = 0; i < length; i++) {
+    zeros = zeros + '0';
+    maxNumber = maxNumber * 10;
+  }
+
+  if (n >= maxNumber) {
+    return zeros.replace(/0/g, '9');
+  }
+
+  n = n + '';
+
+  return `${zeros.slice(0, length - n.length)}${n}`;
 }
 
 module.exports = {

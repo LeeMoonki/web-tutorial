@@ -6,7 +6,18 @@
  * 이 함수는 이전에 전달했던 수를 기억해서 현재 전달하는 인자와 함께 반환합니다.
  */
 function rememberPrevNumber() {
+  let prev;
 
+  return function(n) {
+    let resultPrev = prev;
+
+    prev = n;
+
+    return {
+      prev: resultPrev,
+      current: n,
+    }
+  };
 }
 
 module.exports = {

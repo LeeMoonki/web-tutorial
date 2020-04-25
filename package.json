@@ -4,9 +4,14 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "test": "jest --watch"
+    "test": "jest --watch",
+    "service": "nodemon frontend/server/app.js"
   },
   "dependencies": {
+    "express": "^4.17.1",
     "jest": "^25.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.3"
   }
 }
