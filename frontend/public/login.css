@@ -1,3 +1,6 @@
+div { box-sizing: border-box; }
+input { box-sizing: border-box; }
+
 .login { box-sizing: border-box; height: 240px; width: 350px; }
 .login__wrapper { height: 100%; width: 100%; padding: 5px; background-color: aliceblue;   }
 .auth { display: flex; overflow: hidden; flex-direction: column; width: 100%; border: 0.5px solid; border-color: rgba(196, 211, 224, 0.801); border-radius: 3px; background-color: white; }
@@ -5,9 +8,9 @@
 .auth__pw { padding: 1px 15px 1px 15px; height: 40px; width: 100%; border-bottom: 0.5px solid; border-top: 0px; border-left: 0px; border-right: 0px; border-color: rgba(196, 211, 224, 0.801); }
 .auth__user-selective { display: flex; align-items: center; height: 35px; padding-left: 15px; padding-right: 15px; font-size: 10px; color: gray; background-color: #f7fbff;; }
 .auth_remember-btn {  }
-.auth__request-id { margin-left:auto  }
+.auth__request-id { margin-left:auto;cursor: pointer;  }
 .auth__divider { padding: 3px 3px; }
-.auth__request-pw {  }
+.auth__request-pw { cursor: pointer; }
 .login__buttons { margin-top: 10px; }
 .buttons {  }
 .buttons__submit { margin-top: 10px; }

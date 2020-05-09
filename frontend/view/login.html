@@ -24,14 +24,15 @@
             <form class="auth__user-data">
                 <div class="login__auth">
                     <div class="auth">
-                         <input class="auth__id" type="text" id="user-id" placeholder="아이디" >
-                         <input class="auth__pw" type="text" id="user-pw" placeholder="비밀번호">
+                         <input class="auth__id" type="text" id="user-id" placeholder="아이디" value="1234567890" >
+                         <input class="auth__pw" type="password" id="user-pw" placeholder="비밀번호" value="abcdefghijklmnop">
                         <div class="auth__user-selective">
                             <input class="auth__remember-btn" type="checkbox" id="user-remember-btn">
-                            <label for="user-remember-btn"></label>
-                            <div class="auth__remember-btn-description">
-                                <span>로그인 상태 유지</span>
-                            </div>
+                            <label for="user-remember-btn">
+                                <div class="auth__remember-btn-description">
+                                    <span>로그인 상태 유지</span>
+                                </div>
+                            </label>
                             <div class="auth__request-id">
                                 <span>아이디 찾기</span>
                             </div>
@@ -56,6 +57,7 @@
 
 
     <!-- <script src=""></script> -->
+    <script src="api.js"></script>
     <script src="authentication.js"></script>
   </body>
 </html>

@@ -32,6 +32,10 @@ app.get('/counter', (_, res) => {
   renderView(res, 'counter');
 });
 
+app.get('/login', (_, res) => {
+  renderView(res, 'login');
+});
+
 app.listen(PORT, () => {
   console.log('Ready to serve client pages at : ', PORT);
 });

@@ -10,18 +10,27 @@ function validateInput() {
     let userInputId = userInput[0].value.length;
     let userInputPw = userInput[1].value.length;
     
-    if((userInputId >=8) && (userInputPw >= 8)) {
+    if ((userInputId >= 8) && (userInputPw >= 8)) {
         console.log(userInputId.length); //실패
         console.log(userInputPw.length); //실패
         console.log(userInput[0].value.length);
         reqLogin.disabled = false;
-    }else {
+    } else {
         reqLogin.disabled = true;
     };
  };
 
 function handleSubmit(e){
     e.preventDefault();
+    
+    api.post('http://localhost:8080/api/login', {
+        body: JSON.stringify({
+            id: 'test12345',
+            password: '123456789'
+        })
+    }).then(res => {
+        console.log('response : ', res);
+    });
     alert('post')
 };
 // authForm.addEventListener('submit', handler);

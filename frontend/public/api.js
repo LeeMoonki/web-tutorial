@@ -13,7 +13,7 @@ api.post = (url, options) => {
     headers: {
       'Content-Type': 'application/json',
     },
-    ...options
+    ...options,
   }).then(res => {
     return res.json();
   });
