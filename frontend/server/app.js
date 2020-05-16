@@ -21,7 +21,7 @@ function renderView(res, view) {
 
   res.writeHead(200, { 'Content-Type': 'text/html' });
   res.write(page);
-  res.end();;
+  res.end();
 }
 
 app.get('/', (_, res) => {
@@ -34,6 +34,10 @@ app.get('/counter', (_, res) => {
 
 app.get('/login', (_, res) => {
   renderView(res, 'login');
+});
+
+app.get('/cards', (_, res) => {
+  renderView(res, 'cards');
 });
 
 app.listen(PORT, () => {

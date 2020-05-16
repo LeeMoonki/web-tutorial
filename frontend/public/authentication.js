@@ -30,8 +30,12 @@ function handleSubmit(e){
         })
     }).then(res => {
         console.log('response : ', res);
+        if (res.success) {
+            location.href = 'http://localhost:8080/cards';
+        } else {
+            console.log('로그인 실패');
+        }
     });
-    alert('post')
 };
 // authForm.addEventListener('submit', handler);
 

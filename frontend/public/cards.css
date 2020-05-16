@@ -1,0 +1,13 @@
+.cards-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+.card {
+  display: flex;
+  flex-direction: column;
+  margin: 7px;
+  width: 100px;
+  height: 120px;
+  border: 1px solid #000;
+  border-radius: 3px;
+}
